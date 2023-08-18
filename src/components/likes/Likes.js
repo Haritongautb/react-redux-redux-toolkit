@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { likesIncrement, dislikesIncrement } from "../../actions";
+import { likesIncrement, dislikesIncrement } from "../../reducers/likesSlice";
 import "./likes.css";
 
 const Likes = () => {
     const dispatch = useDispatch();
-    const { likes, dislikes } = useSelector(state => state.likesAndDislikes);
+    const { likes, dislikes } = useSelector(state => state.likes);
 
     const onLikes = () => {
         dispatch(likesIncrement());

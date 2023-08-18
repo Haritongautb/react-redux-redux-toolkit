@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import uniqid from "uniqid";
-import { addComment, loadComments } from "../../actions";
+import { fetchComments, addComment } from "../../reducers/commentsSlice";
 import SingleComment from "../singleComment/SingleComment";
 import "./comments.css";
 
 const Comments = () => {
     const [comment, setComment] = useState("");
-    const { comments } = useSelector(state => state.commentsReducer);
+    const { commentsData } = useSelector(state => state.comments);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadComments())
+        dispatch(fetchComments())
     }, [])
 
     const handleChange = (event) => {
@@ -37,11 +37,11 @@ const Comments = () => {
 
     const updateComments = () => {
         const nextCommentID = uniqid();
-        dispatch(addComment(comment, nextCommentID))
+        dispatch(addComment({ comment, id: nextCommentID }))
         setComment(comment => "");
     }
 
-    const items = renderComments(comments);
+    const items = renderComments(commentsData);
 
     return (
         <div className="card-comments">

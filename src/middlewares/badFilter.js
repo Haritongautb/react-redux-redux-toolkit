@@ -1,16 +1,15 @@
-import { CHANGE_COMMENT, ADD_COMMENT } from "../types/types";
-import { errorON } from "../actions";
+import { errorOn } from "../reducers/appSlice";
+import { addComment, changeComment } from "../reducers/commentsSlice";
 
 const badWords = ['motherFucker', 'asshole'];
 
-const spamFilter = ({ dispatch }) => {
+const spamFilter = (store) => {
     return next => {
         return action => {
-            if (action.type === CHANGE_COMMENT || action.type === ADD_COMMENT) {
+            if (action.type === changeComment().type || action.type === addComment().type) {
                 const hasBadWords = badWords.some(res => action.payload.comment.toLowerCase().includes(res));
-
                 if (hasBadWords) {
-                    return dispatch(errorON('Be good boy!'));
+                    return store.dispatch(errorOn('Be good boy!'));
                 }
             }
             return next(action);

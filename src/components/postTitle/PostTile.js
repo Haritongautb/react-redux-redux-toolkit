@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postTitleChange } from "../../actions";
+import { postTitleChange } from "../../reducers/postTitleSlice";
 import './postTitle.css';
 
 const PostTitle = () => {
     const [title, setTitle] = useState("");
 
     const dispatch = useDispatch();
-    const { postTitle } = useSelector(state => state.postTitleReducer);
+    const { postTitle } = useSelector(state => state.postTitle);
 
     const onSubmitTitle = (event) => {
         event.preventDefault();

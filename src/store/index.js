@@ -12,9 +12,10 @@ const reducers = combineReducers({
     app: appSlice
 })
 
+
 const store = configureStore({
     reducer: reducers,
-    middleWare: getDefaultMiddleware => getDefaultMiddleware().concat(spamFilter),
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(spamFilter),
     devTools: process.env.NODE_ENV !== "production",
 })
 

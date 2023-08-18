@@ -14,7 +14,9 @@ function App() {
         {
           error && (
             <div className="error-message">
-              {error}
+              {
+                error
+              }
             </div>
           )
         }

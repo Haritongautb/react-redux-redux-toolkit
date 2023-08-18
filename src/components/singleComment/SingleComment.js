@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { deleteComment, changeComment } from "../../actions";
+import { deleteComment, changeComment } from "../../reducers/commentsSlice";
 
 const SingleComment = ({ data }) => {
-    const [commentText, setCommentText] = useState("");
     const { comment, id } = data;
+    const [commentText, setCommentText] = useState("");
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const SingleComment = ({ data }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        dispatch(changeComment(commentText, id))
+        dispatch(changeComment({ comment: commentText, id }))
     }
 
     return (
